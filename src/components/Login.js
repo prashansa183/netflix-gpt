@@ -6,17 +6,22 @@ import { checkValideData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  signInWithEmailAndPassword,updateProfile
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { addUser } from "../utils/userSlice";
+
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errormessage, setErrorMessage] = useState(null);
-
+  const navigate = useNavigate();
+  const dispatch=useDispatch()
+  const name=useRef(null)
   const email = useRef(null);
   const password = useRef(null);
-  const navigate=useNavigate()
 
   const handleButtonClick = () => {
     //validate the form data
@@ -38,8 +43,29 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/110851352?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayname, photoURL } = auth.currentUser;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayname: displayname,
+            photoURL: photoURL,
+          }))
+              navigate("/browse");
+              // ...
+            })
+            .catch((error) => {
+              setErrorMessage(error.message)
+            });
+
           console.log(user);
-          navigate("/browse")
+          
           // ...
         })
         .catch((error) => {
@@ -58,13 +84,13 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user)
-          navigate("/browse")
+          console.log(user);
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode+"-"+errorMessage)
+          setErrorMessage(errorCode + "-" + errorMessage);
         });
     }
   };
@@ -93,6 +119,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="Full Name"
+              ref={name}
               className="p-4 my-4 w-full rounded-lg bg-gray-700"
             />
           )}
