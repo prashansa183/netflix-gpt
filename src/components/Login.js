@@ -3,6 +3,12 @@ import Header from "./Header";
 import { useState, useRef } from "react";
 import backgroundimg from "../utils/header-image.png";
 import { checkValideData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -10,6 +16,7 @@ const Login = () => {
 
   const email = useRef(null);
   const password = useRef(null);
+  const navigate=useNavigate()
 
   const handleButtonClick = () => {
     //validate the form data
@@ -19,7 +26,47 @@ const Login = () => {
     );
     setErrorMessage(message);
 
-    //sign - in and sign up
+    if (message) return;
+
+    //sign - in and sign up logic
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse")
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      //sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user)
+          navigate("/browse")
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode+"-"+errorMessage)
+        });
+    }
   };
 
   const toggleSignInForm = () => {
@@ -51,14 +98,14 @@ const Login = () => {
           )}
 
           <input
-            type="text"
+            type="email"
             ref={email}
             placeholder="Email ID"
             className="p-4 my-4 w-full rounded-lg bg-gray-700"
           />
 
           <input
-            type="text"
+            type="password"
             ref={password}
             placeholder="Password"
             className="p-4 my-4 w-full rounded-lg bg-gray-700"
@@ -70,7 +117,7 @@ const Login = () => {
             className="p-4 my-6 bg-red-700 rounded-lg w-full"
             onClick={handleButtonClick}
           >
-            {isSignInForm ? "Sign In" : "Login"}
+            {isSignInForm ? "Sign In" : "sign up"}
           </button>
 
           <h1 className=" mx-9 cursor-pointer" onClick={toggleSignInForm}>
