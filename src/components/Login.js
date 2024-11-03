@@ -9,7 +9,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-
+import { USER_AWATAR } from "./constants";
 import { useDispatch } from "react-redux";
 
 import { addUser } from "../utils/userSlice";
@@ -46,7 +46,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/110851352?v=4",
+            photoURL:{USER_AWATAR},
           })
             .then(() => {
               // Profile updated!
