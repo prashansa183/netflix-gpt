@@ -9,7 +9,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { USER_AWATAR } from "./constants";
+import { USER_AWATAR } from "../utils/constants";
 import { useDispatch } from "react-redux";
 
 import { addUser } from "../utils/userSlice";
