@@ -15,7 +15,7 @@ const movieSlice =createSlice({
     },
   },
 },
-// console.log(addNowPlayingMovie)
+
 
 );
 

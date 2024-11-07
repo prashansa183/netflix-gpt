@@ -16,11 +16,11 @@ const useNowPlayingMovies=()=>{
 
     //this below is a promise
     const json = await data.json();
-    console.log(json.results);
+    // console.log(json.results);
     dispatch(addNowPlayingMovie(json.results));
   };
   useEffect(() => {
     getNowPlayingMovies();
   }, []);
 }
-export default useNowPlayingMovies;
+export default useNowPlayingMovies; 
