@@ -1,11 +1,15 @@
 
 import { API_OPTIONS } from  "../utils/constants";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { addPopularMovie } from "../utils/movieSlice";
 import React, { useEffect } from "react";
 
 const usePopularMovies=()=>{
   const dispatch = useDispatch();
+
+  const PopularMovies=useSelector(store=>store.movies.PopularMovies); //memoization
+
 
   //fetch data from tmdb api and update store 
   const getPopularMovies = async () => {
@@ -21,6 +25,7 @@ const usePopularMovies=()=>{
     dispatch(addPopularMovie(json.results));
   };
   useEffect(() => {
+    if(!PopularMovies) 
     getPopularMovies();
   }, []);
 }

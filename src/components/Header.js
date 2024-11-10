@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { addUser, removeUser } from "../utils/userSlice";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
-import lang from "../hooks/languageConstants";
+import lang from "../utils/languageConstants";
 import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {

@@ -3,9 +3,11 @@ import { API_OPTIONS } from  "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUpcomingMovie } from "../utils/movieSlice";
 import React, { useEffect } from "react";
-
+import { useSelector } from "react-redux";
 const useUpcomingMovies=()=>{
   const dispatch = useDispatch();
+
+  const UpcomingMovies = useSelector((store) => store.movies.UpcomingMovies); //memoization
 
   //fetch data from tmdb api and update store 
   const getTrendingMovies = async () => {
@@ -21,6 +23,7 @@ const useUpcomingMovies=()=>{
     dispatch(addUpcomingMovie(json.results));
   };
   useEffect(() => {
+    if(!UpcomingMovies)
     getTrendingMovies();
   }, []);
 }

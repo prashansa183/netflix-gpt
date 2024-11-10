@@ -6,11 +6,12 @@ import backgroundimg from "../utils/header-image.png";
 const GptSearch = () => {
   return (
     <div>
-        <div className="absolute -z-10 ">
+        <div className="fixed -z-10 ">
           <img src={backgroundimg} alt="logo" />
         </div>
-      <GptMovieSuggestion/>
       <GptSearchBar/>
+      <h1>movie suggest</h1>
+      <GptMovieSuggestion/>
     </div>
   )
 }
