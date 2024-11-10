@@ -61,8 +61,8 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b w-screen flex justify-between from-black z-10">
-      <img className="w-44" src={netflixlogo} alt="Logo" />
+    <div className="absolute px-8 py-2 bg-gradient-to-b w-screen flex justify-between from-black z-10 flex-col md:flex-row ">
+      <img className="w-44 mx-auto md:mx-0" src={netflixlogo} alt="Logo" />
 
       {user && (
         <div className="flex gap-4 p-2 items-center ">
@@ -79,14 +79,14 @@ const Header = () => {
             </select>
           )}
           <button
-            className=" py-2 px-4 m-2 bg-purple-800 text-white  rounded-lg "
+            className=" py-2 px-4 m-2  bg-purple-800 text-white  rounded-lg "
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Home" : "GPT Search"}
           </button>
           <div className="">
             <img
-              className="w-8 h-10  rounded-full object-cover"
+              className=" hidden  md:block w-8 h-10   rounded-full object-cover"
               alt="usericon"
               src={user?.photoURL}
             />

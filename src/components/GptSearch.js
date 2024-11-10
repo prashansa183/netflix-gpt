@@ -1,19 +1,28 @@
-import React from 'react'
-import GptMovieSuggestion from './GptMovieSuggestion'
-import GptSearchBar from './GptSearchBar'
+import React from "react";
+import GptMovieSuggestion from "./GptMovieSuggestion";
+import GptSearchBar from "./GptSearchBar";
 import backgroundimg from "../utils/header-image.png";
 
 const GptSearch = () => {
   return (
-    <div>
-        <div className="fixed -z-10 ">
-          <img src={backgroundimg} alt="logo" />
-        </div>
-      <GptSearchBar/>
-      <h1>movie suggest</h1>
-      <GptMovieSuggestion/>
-    </div>
-  )
-}
+    <>
+      {/* Full-screen background image */}
+      <div className="fixed inset-0 -z-10">
+        <img 
+          className="w-full h-full object-cover" 
+          src={backgroundimg} 
+          alt="background" 
+        />
+      </div>
 
-export default GptSearch
+      {/* Main content */}
+      <div className=" md:p-0">
+        
+        <GptSearchBar />
+        <GptMovieSuggestion />
+      </div>
+    </>
+  );
+};
+
+export default GptSearch;
