@@ -46,7 +46,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:{USER_AWATAR},
+            photoURL:USER_AWATAR,
           })
             .then(() => {
               // Profile updated!
@@ -68,7 +68,7 @@ const Login = () => {
 
          
 
-          // ...
+          
         })
         .catch((error) => {
           const errorCode = error.code;
