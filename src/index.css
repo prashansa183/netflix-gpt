@@ -13,3 +13,20 @@
 
 @import "tailwindcss/utilities" */
 
+/* Custom scrollbar for horizontal scrolling */
+.movie-scroll-container::-webkit-scrollbar {
+  height: 8px; /* Height of horizontal scrollbar */
+}
+
+.movie-scroll-container::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Background color of scrollbar track */
+}
+
+.movie-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #ff0000; /* Scrollbar thumb color */
+  border-radius: 10px; /* Rounded corners for thumb */
+}
+
+.movie-scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #cc0000; /* Darker color on hover */
+}

@@ -39,14 +39,15 @@ const GptSearchBar = () => {
     }
 
     //  Extract the keyword (for simplicity, use the last word in the query)
-    const keyword = userQuery.split(" ").pop();
-    console.log("pop wala");
-    console.log(keyword);
+
+    // const keyword = userQuery.split(" ");
+    // console.log("pop wala");
+    // console.log(keyword);
 
     // Call the search function with the keyword
-    const results = movieSearch(keyword);
+    const results = movieSearch(userQuery);
     //this is the array
-    console.log("moovisearchresult");
+    // console.log("moovisearchresult");
 
     console.log(results);
 
